@@ -1,0 +1,48 @@
+//pontes e pontos de articulação, se remover a aresta, faz com que o numero de componentes conexos aumente
+//se o timer[a] for menor que o low[b], significa que a-b é uma ponte;
+//se o timer[b] for menor ou igual a low[e] significa que B é um ponto de articulação 
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int N = 10;
+bool vis[N];
+int timer[N];
+int low[N];
+vector <int> adjList[N];
+int tps = 0;
+
+void dfs(int u, int p = -1){
+	vis[u] = true;
+	timer[u] = low[u] = tps++;
+	int filho = 0;
+	for(int v:adjList[u]){
+		if(v == p) continue;
+		if(!vis[v]){
+			dfs(v,u);
+			low[u] = min(low[u],low[v]);
+			if(timer[u]< low[v]){
+				// aresta u-v é ponte
+			}
+			if(timer[u] <= low[v] and p != -1){
+				// vertice u  é ponto de aticulação
+			}
+			filho++;
+		}
+		else{
+			low[u] = min(low[u], timer[v]);
+		}
+		if(p == -1 and filho > 1){
+			// u é ponto de articulação, so pra resolver o problema de um vertice possuir so um filho
+		}
+	}
+}
+
+
+
+int main(){
+	
+}
+
+
+
